@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+import os
+import requests
+
+from dotenv import load_dotenv
+from rich import print
+from rich.console import Console
+from rich.panel import Panel
+
+load_dotenv()
+console = Console()
+
+# https://app.freecurrencyapi.com/request-playground
+API_KEY = os.getenv('TOKEN')
+BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
+CURRENCIES = ("USD", "EUR", "GBP", "RUB", "CNY")
+
+os.system('clear')
+
+def convert_currency(base="USD"):
+    if base in CURRENCIES:
+        currencies = ','.join(CURRENCIES)
+        url = f"{BASE_URL}&base_currency={base}&currencies={currencies}"
+        response = requests.get(url)
+        res = response.json()
+        return res["data"]
+    else:
+        print("Invalid currency.")
+        return None
+
+while True:
+    base = input("Enter amount & the base currency [q for quit]: ").upper()
+    if base == "Q":
+        break
+    amount =  ''.join([i for i in base if i.isdigit()])
+    amount = 1 if amount == '' else int(amount)
+    base =  ''.join([i for i in base if i.isalpha()])
+
+    result = convert_currency(base)
+    if not result:
+        continue
+
+    os.system('clear')
+    tickers = [f"[bold][yellow]{ticker}[/]: [cyan]{round(value * amount, 2)}[/]" for ticker, value in result.items() if ticker != base]
+    print(Panel(
+        '\n'.join(tickers),
+        title_align="right",
+        title=f'[yellow]{base}[/]: [red]{amount}')
+    )
