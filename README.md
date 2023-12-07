@@ -10,4 +10,5 @@
 - nice look
 ![nice look](img/currency_converter_02.png)
 
-![even weird inputs will work](img/currency_converter_03.png)
+- no need in ".py" extension - just name of the script
+![no need in .py extension](img/currency_converter_03.png)
