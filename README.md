@@ -34,3 +34,17 @@
   ```Bash
   ./currency_converter
   ```
+
+  ## YouTube Downloader
+
+- works with links from clipboard
+![works with links from clipboard](img/youtube_01.png)
+
+- works with direct links
+![works with direct links](img/youtube_02.png)
+
+- ask for a youtube link, if none provided
+![ask for a youtube link, if none provided](img/youtube_03.png)
+
+Very simple and straightforward 
+requires only pytube, as indicated in requirements.txt
