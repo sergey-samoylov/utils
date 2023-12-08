@@ -1,5 +1,5 @@
 # utils
-## Currency Converter
+## 01 Currency Converter
 
 - works with weird inputs:
 ![even weird inputs will work](img/currency_converter_00.png)
@@ -35,7 +35,7 @@
   ./currency_converter
   ```
 
-  ## YouTube Downloader
+## 02 YouTube Downloader
 
 - works with links from clipboard
 ![works with links from clipboard](img/youtube_01.png)
