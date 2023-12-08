@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import sys
+import tkinter as tk
+
+from pytube import YouTube
+
+def download_video(url, path_save_to):
+    try:
+        yt = YouTube(url)
+        streams = yt.streams.filter(progressive=True, file_extension="mp4")
+        highest_res_stream = streams.get_highest_resolution()
+        highest_res_stream.download(output_path=path_save_to)
+        print(f"Video downloadaded to {path_save_to}")
+    except Exception as e:
+        print(e)
+
+def choose_video_link():
+    root = tk.Tk()
+    root.withdraw()
+    clipboard = root.clipboard_get()
+    if len(sys.argv) == 2:
+        prog, video_url = sys.argv
+    elif clipboard[:24] == 'https://www.youtube.com/':
+        video_url = clipboard
+    else:
+        video_url = input("Please enter a youtube url: ")
+    return video_url
+
+
+if __name__ == "__main__":
+    video_url = choose_video_link()
+    save_dir = "/home/sam/Videos"
+
+    if save_dir:
+        print("Started download ...")
+        download_video(video_url, save_dir)
+    else:
+        print("Save location not defined.")
